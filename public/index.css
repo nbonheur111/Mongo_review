@@ -1,0 +1,29 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px ;
+    margin: 50px;
+}
+
+.input-container {
+    margin: 10px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-around;
+}
+
+#navbar h1{
+    background-color: white; 
+    color: black; 
+    cursor: pointer;
+    border-radius: 5%;
+    padding: 10px;
+
+}
+#navbar h1:hover {
+    background-color: #bfc8cb;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  }
