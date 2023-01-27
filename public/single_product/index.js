@@ -97,8 +97,6 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     })
     let newData = await response.json();
 
-       
-
     })
 
     //1.6 description o f the item
