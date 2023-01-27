@@ -85,7 +85,7 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     //    inStockTag.innerHTML = `✅ in Stock: ${availableUnits} items available`
     //    if(availableUnits <= 0){
     //     inStockTag.innerHTML = `⛔️ OUT OF STOCK`;
-    //     buyBtn.disabled = true;
+        // buyBtn.disabled = true;
     //    }
        let newInventory = {inventory: finalData.inventory}
        let response = await fetch(`http://localhost:5000/update_quantity/${id}`,{
