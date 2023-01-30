@@ -34,22 +34,26 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     pTag.style.fontWeight = 'bold'
 
     //1.2 availability of the item
-    let inStockTag = document.createElement("p")
-    if(finalData.inventory > 5){
-        inStockTag.textContent = `✅ in Stock: ${finalData.inventory} items available`
-        inStockTag.style.color = 'green'
-    }else if(finalData.inventory > 0 && finalData.inventory <= 5){
-        inStockTag.textContent = `⌛️ Almost Gone! Only ${finalData.inventory} items`
-        inStockTag.style.color = 'red'
-    }else {
-        inStockTag.textContent = `⛔️ OUT OF STOCK`
-        inStockTag.style.color = 'red'
-    }
+    // let inStockTag = document.createElement("p")
 
-    //display the number of available items
-    let quantityDisplayTag = document.createElement("p")
-    quantityDisplayTag.textContent = ` ${finalData.inventory} remainining`;
-    
+    // const changeProductStatus = () => {
+     
+    //                if(finalData.inventory > 5){
+    //         inStockTag.textContent = `✅ in Stock: ${finalData.inventory} items available`
+    //         inStockTag.style.color = 'green'
+    //     }else if(finalData.inventory > 0 && finalData.inventory <= 5){
+    //         inStockTag.textContent = `⌛️ Almost Gone! Only ${finalData.inventory} items`
+    //         inStockTag.style.color = 'red'
+    //     }else {
+    //         inStockTag.textContent = `⛔️ OUT OF STOCK`
+    //         inStockTag.style.color = 'red'
+    //         buyBtn.disabled = true;
+    //     }
+           
+
+
+    // }
+   
 
 
     //1.3 create img tag and add the photo to it
@@ -69,25 +73,35 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 
     //1.5.1  buy button functionality and visibility
 
+    const productStatus = () => {
+
+
+    }
+    let inStockTag = document.createElement("p")
+
     buyBtn.addEventListener('click', async() => {
-       let availableUnits = finalData.inventory -1;
-       if(availableUnits > 5){
-           inStockTag.textContent = `✅ in Stock: ${availableUnits} items available`
-           inStockTag.style.color = 'green'
-       }else if(availableUnits > 0 && availableUnits <= 5){
-           inStockTag.textContent = `⌛️ Almost Gone! Only ${availableUnits} items`
-           inStockTag.style.color = 'red'
-       }else {
-           inStockTag.textContent = `⛔️ OUT OF STOCK`
-           inStockTag.style.color = 'red'
-       }
-   
-    //    inStockTag.innerHTML = `✅ in Stock: ${availableUnits} items available`
-    //    if(availableUnits <= 0){
-    //     inStockTag.innerHTML = `⛔️ OUT OF STOCK`;
-        // buyBtn.disabled = true;
-    //    }
-       let newInventory = {inventory: finalData.inventory}
+        let availableUnits = finalData.inventory -1;
+        // window.location.reload();
+        
+        if(availableUnits > 5){
+            inStockTag.textContent = `✅ in Stock: ${availableUnits} items available`
+            inStockTag.style.color = 'green'
+        }else if( availableUnits <= 5 && availableUnits > 0){
+            inStockTag.textContent = `⌛️ Almost Gone! Only ${availableUnits} items`
+            inStockTag.style.color = 'red'
+
+        }
+        ///test logic
+        else if(availableUnits = 0){
+            inStockTag.textContent = `⛔️ OUT OF STOCK`
+            inStockTag.style.color = 'orange'
+            buyBtn.disabled = true;
+        }
+
+        
+
+ 
+       let newInventory = {inventory: availableUnits}
        let response = await fetch(`http://localhost:5000/update_quantity/${id}`,{
         method: 'PUT',
         headers: {
@@ -99,7 +113,7 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 
     })
 
-    //1.6 description o f the item
+    //1.6 description of the item
     let descriptionTag = document.createElement("p") 
     descriptionTag.textContent = finalData.description
     
@@ -110,7 +124,6 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     displayDbDatatoHTML(pTag)
     displayDbDatatoHTML(inStockTag)
     displayDbDatatoHTML(imgTag)
-  
     displayDbDatatoHTML(priceTag)
     displayDbDatatoHTML(descriptionTag)
     displayDbDatatoHTML(buyBtn)

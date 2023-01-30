@@ -12,6 +12,7 @@
 #navbar {
     display: flex;
     justify-content: space-around;
+    background-color: black;
 }
 
 #navbar h1{
@@ -23,7 +24,7 @@
 
 }
 #navbar h1:hover {
-    background-color: #bfc8cb;
+    background-color: black;
     color: white;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
   }

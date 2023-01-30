@@ -64,7 +64,6 @@ app.get('/find_single_product/:idOfProduct', async (req, res) => {
 app.put('/update_product/edit_product/', async(req, res) => {
 
     let id = req.body.id
-    console.log('this is the f body', id)
 
     console.log("body", req.body)
     
@@ -76,7 +75,7 @@ app.put('/update_product/edit_product/', async(req, res) => {
         description,
         photo
     }
-  
+
     let response = await MyProduct.findByIdAndUpdate(id, newValuesObject, {new:true})
     console.log(response)
     res.send(response)
@@ -94,7 +93,7 @@ app.delete('/delete_product/:idOfProduct', async(req, res) => {
 //buy button
 app.put('/update_quantity/:idOfProduct', async (req, res) => {
     let id = req.params.idOfProduct
-    console.log(id)
+    console.log(" You know what is",id)
     console.log(req.body)
     let response = await MyProduct.findByIdAndUpdate(id, req.body, {new:true});
     console.log(response)

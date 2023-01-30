@@ -56,7 +56,32 @@ const getData = async () =>{
          
             // containerElement.appendChild(quantityPTag)
         });
+
+
+    //search button
+
+let searchButton = document.getElementById("search-btn")
+searchButton.addEventListener('click', () => {
+    
+    let searchValue = document.getElementById("search").value;
+    console.log(searchValue);
+    console.log(parsedData)
+
+    parsedData.forEach(product  => {
+        if(product.name.toLowerCase() == searchValue.toLowerCase()){
+            console.log(product.name)
+            window.location.href = `../single_product?idInQuery=${product._id}` 
+        } else{
+            let unavailableContainer = document.getElementById("container-unavailable-item-on-search")
+            let unavailableItemTag = document.createElement("p")
+            unavailableItemTag.textContent = `${product.name} is not available in our store`
+            unavailableContainer.appendChild(unavailableItemTag)
+        }
     })
+})
+    })
+
+
 }
 getData()
 
@@ -79,3 +104,5 @@ let aboutBtn = document.getElementById("about")
 aboutBtn.addEventListener('click', () => {
     window.location.href = '/about'
 })
+
+
