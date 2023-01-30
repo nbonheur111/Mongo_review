@@ -33,20 +33,24 @@ app.get('/all_products', async(req, res) => {
 //route to create new products
 app.post('/create_product', async (req, res) => {
     const {productNameStr: name, priceNum: price, currentInventoyNum: inventory, productDescriptionStr: description, productPhotoStr: photo} = req.body;
-    console.log(req.body)
-    let returnedValue = await MyProduct.create({
-        name,
-        price,
-        inventory,
-        description,
-        photo
-    });
+    console.log(name)
 
-    console.log(returnedValue)
-    if(returnedValue){
-        console.log("Item Created Successfully!")
+    if(name != '' & photo != ''){
+        let returnedValue = await MyProduct.create({
+            name,
+            price,
+            inventory,
+            description,
+            photo
+        });
+    
+        console.log(returnedValue)
+        if(returnedValue){
+            console.log("Item Created Successfully!")
+        }
+        res.send(returnedValue)
     }
-    res.send(returnedValue)
+
 })
 //find product using its parameter
 

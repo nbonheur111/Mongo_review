@@ -72,16 +72,28 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     buyBtn.style.backgroundColor = 'lightblue'
 
     //1.5.1  buy button functionality and visibility
+    
 
-    const productStatus = () => {
+    let inStockTag =document.createElement("p")
 
+    //first check if we have at least one item in store
 
+    if(finalData.inventory <= 0){
+        buyBtn.disabled = true;
+        inStockTag.textContent = `⛔️ OUT OF STOCK`
+        inStockTag.style.color = 'red'
+    } else{
+        inStockTag.textContent = `✅ in Stock: ${finalData.inventory} items available`
+        inStockTag.style.color = "green"
     }
-    let inStockTag = document.createElement("p")
+   
 
     buyBtn.addEventListener('click', async() => {
+        
+        //  window.location.reload();
+
         let availableUnits = finalData.inventory -1;
-        // window.location.reload();
+        finalData.inventory -= 1
         
         if(availableUnits > 5){
             inStockTag.textContent = `✅ in Stock: ${availableUnits} items available`
@@ -90,15 +102,12 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
             inStockTag.textContent = `⌛️ Almost Gone! Only ${availableUnits} items`
             inStockTag.style.color = 'red'
 
-        }
-        ///test logic
-        else if(availableUnits = 0){
+        }else if(availableUnits <= 0){
             inStockTag.textContent = `⛔️ OUT OF STOCK`
-            inStockTag.style.color = 'orange'
+            inStockTag.style.color = 'red'
             buyBtn.disabled = true;
         }
 
-        
 
  
        let newInventory = {inventory: availableUnits}
@@ -111,7 +120,10 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     })
     let newData = await response.json();
 
+
     })
+
+
 
     //1.6 description of the item
     let descriptionTag = document.createElement("p") 
@@ -123,6 +135,7 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     //2 display above created elements on the page
     displayDbDatatoHTML(pTag)
     displayDbDatatoHTML(inStockTag)
+    
     displayDbDatatoHTML(imgTag)
     displayDbDatatoHTML(priceTag)
     displayDbDatatoHTML(descriptionTag)

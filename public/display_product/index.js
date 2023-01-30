@@ -61,23 +61,30 @@ const getData = async () =>{
     //search button
 
 let searchButton = document.getElementById("search-btn")
+
+
 searchButton.addEventListener('click', () => {
-    
     let searchValue = document.getElementById("search").value;
+    
     console.log(searchValue);
-    console.log(parsedData)
+    let unavailableContainer = document.getElementById("container-unavailable-item-on-search")
+    let unavailableItemTag = document.createElement("p")
+    
 
     parsedData.forEach(product  => {
+
         if(product.name.toLowerCase() == searchValue.toLowerCase()){
-            console.log(product.name)
             window.location.href = `../single_product?idInQuery=${product._id}` 
-        } else{
-            let unavailableContainer = document.getElementById("container-unavailable-item-on-search")
-            let unavailableItemTag = document.createElement("p")
-            unavailableItemTag.textContent = `${product.name} is not available in our store`
+        }else{
+            unavailableItemTag.textContent = `${searchValue} is not available in our store`
             unavailableContainer.appendChild(unavailableItemTag)
+
         }
+
     })
+    
+
+
 })
     })
 
