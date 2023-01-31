@@ -10,6 +10,10 @@ const getData = async () =>{
         parsedData.forEach(object => {
             //red if inventory is under 5 items left
 
+
+            let mainDiv = document.createElement("div")
+            mainDiv.style.cssText ="display: flex; justify-content: center; background-color: pink; border: 2px"
+
             let quantityPTag = document.createElement("p");
                 quantityPTag.textContent = `${object.inventory} remaining`
 

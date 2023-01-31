@@ -25,10 +25,21 @@ const getData = async () =>{
             let deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete"
             deleteBtn.style.backgroundColor = "red"
+            deleteBtn.style.padding = '10px'
+            deleteBtn.style.margin = '3px solid green'
+            deleteBtn.style.borderRadius = '15%';
 
             let editBtn = document.createElement("button");
             editBtn.textContent = "Edit this product"
             editBtn.style.color = "blue"
+            editBtn.style.padding = '10px'
+            editBtn.style.margin = '1px solid green'
+            editBtn.style.borderRadius = '15%';
+
+            let lineTag = document.createElement("br")
+            lineTag.textContent = `<br> <br><br><br>`
+        
+
 
 
             if(object.inventory <= 5){
@@ -45,6 +56,7 @@ const getData = async () =>{
             containerElement.appendChild(quantityPTag)
             containerElement.appendChild(editBtn)
             containerElement.appendChild(deleteBtn)
+            containerElement.appendChild(lineTag)
 
             //edit & delete buttons functionality
 
@@ -57,11 +69,25 @@ const getData = async () =>{
             
             //delete Button
             deleteBtn.addEventListener('click', async(event) => {
-                let productId = object._id;
-                let response = await fetch(`http://localhost:5000/delete_product/${productId}`, {
-                    method: "DELETE"
-  
-                })
+                let userPreference = '';
+                let popUpMessageTag = document.createElement("p")
+                
+                if(confirm(`Are you sure you want to delete ${object.name} from the store?`) == true){
+                    let productId = object._id;
+                    let response = await fetch(`http://localhost:5000/delete_product/${productId}`, {
+                        method: "DELETE"
+      
+                    })
+                    userPreference = `
+                    The item has been deleted.
+                    `
+                    window.location.href = '../display_product'
+                    
+                }else {
+                    userPreference = `${object.name} not deleted`
+                    
+                }
+                alert(userPreference)
 
             })
             
